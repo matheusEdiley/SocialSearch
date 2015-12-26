@@ -1,0 +1,156 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+
+
+{% load staticfiles %}
+<img src="{% static 'app/img/twitter.jpg' %}" height="200px" width="1170px">
+<br /><br />
+<div class="row">
+  <div class="col-md-6" style="width:1200px">
+
+
+    <!-- Custom Tabs -->
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab_1" data-toggle="tab"><span class="glyphicon glyphicon-phone"></span>&nbsp;&nbsp;Lista de Tweets </a></li>
+        <li><a href="#tab_2" data-toggle="tab"><span class="glyphicon glyphicon-new-window"></span>&nbsp;&nbsp;Ranks de palavras</a></li>
+        <li><a href="#tab_3" data-toggle="tab"><span class="glyphicon glyphicon-tags"></span>&nbsp;&nbsp;Polaridade</a></li>
+        <li class="pull-right">
+          <form action="." class="sidebar-form" method="post">
+           {% csrf_token %}
+
+           <div class="box-tools">
+            <div class="input-group" style="width: 150px;">
+
+              <input type="text" name="your_name" class="form-control input-sm pull-right" style="width:150px" placeholder="Informe uma hashtag '#'">
+
+              <div class="input-group-btn">
+               <input type="text" name="profundidade" class="form-control input-sm pull-right" style="width:50px" placeholder="10">
+             </div>
+             <div class="input-group-btn">
+
+               <select name="polaridade" class="form-control input-sm pull-right" style="width:100px" placeholder="Polaridade">
+                 <option>Todos</option>
+                 <option>Neutro</option>
+                 <option>Negativo</option>
+                 <option>Positivo</option>
+               </select>
+             </div>
+             <div class="input-group-btn">
+
+              <button type="submit" name="form1" style="height:30px" class="btn btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab_1">
+      <br />
+      <form action="." class="sidebar-form" method="post">
+       {% csrf_token %}
+       <div class="box-tools">
+        <div class="input-group" style="width: 150px;">
+
+          <input type="text" name="buscaBinaria" class="form-control input-sm pull-right" style="width:300px" placeholder="Busca Binária">
+          <div class="input-group-btn">
+            <button name="form2" type="submit" style="height:30px" class="btn btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <br />
+    
+    <table class="table table-hover">
+      <tr>
+        <th>Polaridade</th>
+        <th>Tweets</th>
+      </tr>
+      {%for key,value in listDict.items%}
+      <tr> 
+
+        {% if value == 'Positivo' %}
+        <td><span class="label label-success">Positivo</span></td>
+        {% endif %}
+
+        {% if value == 'Negativo' %}
+        <td><span class="label label-danger">Negativo</span></td>
+        {% endif %}
+
+        {% if value == 'Neutro' %}
+        <td><span class="label label-warning">Neutro</span></td>
+        {% endif %}
+
+        <td>{{ key }}</td>
+
+      </tr>
+      {% endfor %}
+    </table>
+  </div><!-- /.tab-pane -->
+  <div class="tab-pane" id="tab_2">
+    <br />
+    <table class="table table-condensed">
+      <tr>
+        <th>Palavras</th>
+        <th style="width: 40px">Quantidade</th>
+      </tr>
+      {%for key,value in listPalavras%}
+      <tr>
+        <td>{{ key }}</td>
+        <td><span class="badge bg-red">{{ value }}</span></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div><!-- /.tab-pane -->
+  <div class="tab-pane" id="tab_3">
+    <br />
+    <table class="table table-condensed">
+      <tr>
+
+        <th>Polaridade</th>
+        <th>Porcentagem</th>
+        <th style="width: 40px">Quantidade</th>
+      </tr>
+
+      <tr>
+        <td>Positivo</td>
+        <td>
+          <div class="progress progress-xs progress-striped active">
+            <div class="progress-bar progress-bar-success" style="width: {{ percentPos }}%"></div> &nbsp;&nbsp;{{ percentPos }}%
+          </div>
+        </td>
+        <td><span class="badge bg-green">{{ qtdPos }}</span></td>
+      </tr>
+
+      <tr>
+
+        <td>Negativo</td>
+        <td>
+          <div class="progress progress-xs progress-striped active">
+            <div class="progress-bar progress-bar-danger" style="width: {{ percentNeg }}%"></div>&nbsp;&nbsp;{{ percentNeg }}%
+          </div>
+        </td>
+        <td><span class="badge bg-red">{{ qtdNeg }}</span></td>
+      </tr>
+      <tr>
+
+        <td>Neutro</td>
+        <td>
+          <div class="progress progress-xs progress-striped active">
+            <div class="progress-bar progress-bar-warning" style="width: {{ percentNeutro }}%"></div>&nbsp;&nbsp;{{ percentNeutro }}%
+          </div>
+        </td>
+        <td><span class="badge bg-yellow">{{ qtdNeutro }}</span></td>
+      </tr>
+
+    </table>
+
+  </div><!-- /.tab-pane -->
+
+</div><!-- /.tab-content -->
+</div><!-- nav-tabs-custom -->
+</div><!-- /.col -->
+
+{% endblock %}
