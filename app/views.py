@@ -8,9 +8,7 @@ from datetime import datetime
 from models.TweetConn import *
 from models.InstagramConn import *
 from models.TratarTexto import *
-from forms import *
-                            
-                                                                                        
+from forms import *                                                                                            
 
 def twitter(request):
     """Renders the home page."""
@@ -98,7 +96,6 @@ def twitter(request):
             'listPalavras': listaPalavras,
         })
     )
-
 
 
 def instagram(request):
