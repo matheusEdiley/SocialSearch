@@ -29,7 +29,6 @@ class TratarTexto(object):
 
         Retira todos os links da string passada por parametro,
         usando uma Expressão regex.
-        Retira tanto links http quanto https.
 
             return string
         '''
