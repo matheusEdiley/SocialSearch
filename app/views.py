@@ -9,7 +9,8 @@ from models.TweetConn import *
 from models.InstagramConn import *
 from models.TratarTexto import *
 from forms import *
-                                                                                            
+                            
+                                                                                        
 
 def twitter(request):
     """Renders the home page."""
