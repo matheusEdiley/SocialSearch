@@ -16,7 +16,7 @@ class InstagramConn(object):
         self.api = InstagramAPI()
         self.api = InstagramAPI(client_id=self.client_id,
                                 client_secret=self.client_secret, access_token=self.access_token)
-
+    
     def BuscarResultados(self, query, qtd,polaridade):
         ''' BuscarResultados(text) -> string
          A api irá buscar pela tag referenciada abaixo,limitando a pesquisa
